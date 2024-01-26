@@ -14,15 +14,15 @@ namespace Messaging {
 
 		private async void Start() {
 			await Task.Delay(2000);
-			CreateMessage("asl;dkrhjufioe qvnfioeqlcnnmcuq");
+			CreateMessage("<sprite=0><sprite=0><sprite=0><sprite=0><sprite=0><sprite=0><sprite=0>");
 			await Task.Delay(2000);
-			CreateMessage("asl;dkrhjufioe qvnfioeqlcnnmcuq");
+			CreateMessage("<sprite=0><sprite=0><sprite=0><sprite=0><sprite=0><sprite=0>");
 			await Task.Delay(2000);
-			CreateMessage("asl;dkrhjufioe qvnfioeqlcnnmcuq");
+			CreateMessage("<sprite=0><sprite=0><sprite=0><sprite=0><sprite=0>");
 			await Task.Delay(2000);
-			CreateMessage("asl;dkrhjufioe qvnfioeqlcnnmcuq");
+			CreateMessage("<sprite=0><sprite=0><sprite=0><sprite=0>");
 			await Task.Delay(2000);
-			CreateMessage("asl;dkrhjufioe qvnfioeqlcnnmcuq");
+			CreateMessage("<sprite=0><sprite=0><sprite=0>");
 		}
 
 		public void CreateMessage(string message) {

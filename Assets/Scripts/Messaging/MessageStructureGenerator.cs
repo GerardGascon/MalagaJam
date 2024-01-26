@@ -19,8 +19,8 @@ namespace Messaging {
 		}
 
 		private Message GenerateMessage(int offsetY) {
-			Message message = Instantiate(messagePrefab, Vector2.zero, Quaternion.identity, transform);
-			message.RectTransform.anchoredPosition = new Vector2(0, -offsetY);
+			Message message = Instantiate(messagePrefab, Vector3.zero, Quaternion.identity, transform);
+			message.RectTransform.anchoredPosition3D = new Vector2(0, -offsetY);
 			return message;
 		}
 	}
