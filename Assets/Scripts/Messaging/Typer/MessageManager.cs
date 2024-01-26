@@ -12,19 +12,6 @@ namespace Messaging {
 			_messages = messageStructureGenerator.GenerateMessages();
 		}
 
-		private async void Start() {
-			await Task.Delay(2000);
-			CreateMessage("<sprite=0><sprite=0><sprite=0><sprite=0><sprite=0><sprite=0><sprite=0>");
-			await Task.Delay(2000);
-			CreateMessage("<sprite=0><sprite=0><sprite=0><sprite=0><sprite=0><sprite=0>");
-			await Task.Delay(2000);
-			CreateMessage("<sprite=0><sprite=0><sprite=0><sprite=0><sprite=0>");
-			await Task.Delay(2000);
-			CreateMessage("<sprite=0><sprite=0><sprite=0><sprite=0>");
-			await Task.Delay(2000);
-			CreateMessage("<sprite=0><sprite=0><sprite=0>");
-		}
-
 		public void CreateMessage(string message) {
 			ModifyMessageText(message, _messages.Length - 1);
 		}
