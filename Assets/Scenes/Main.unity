@@ -132,6 +132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1079303792}
+  - component: {fileID: 1079303793}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -158,6 +159,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1079303793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079303791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ce276be77304236a23df45b19b4cc08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxVisibleMessages: 3
+  messageHeight: 16
+  messagePrefab: {fileID: 3730343923350390943, guid: 6bf006df27e33a24088a28c9d46dbb43, type: 3}
 --- !u!1 &1284257431
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,15 +228,15 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.1746784
-    y: 0.022927688
-    width: 0.6499661
-    height: 0.9523809
+    x: 0
+    y: 0
+    width: 1
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 0.9
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
