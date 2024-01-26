@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -15,7 +14,7 @@ namespace Messaging {
 			_textBox = textBox;
 		}
 
-		public IEnumerator AnimateTextIn(List<DialogueCommand> commands, string processedMessage, Action onFinish) {
+		public IEnumerator AnimateTextIn(string processedMessage, Action onFinish) {
 			_textAnimating = true;
 			float secondsPerCharacter = 1f / 150f;
 			float timeOfLastCharacter = 0;
@@ -53,8 +52,6 @@ namespace Messaging {
 				}
 				if (ShouldShowNextCharacter(secondsPerCharacter, timeOfLastCharacter)) {
 					if (visibleCharacterIndex <= charCount) {
-						ExecuteCommandsForCurrentIndex(commands, visibleCharacterIndex, ref secondsPerCharacter,
-							ref timeOfLastCharacter);
 						if (visibleCharacterIndex < charCount &&
 						    ShouldShowNextCharacter(secondsPerCharacter, timeOfLastCharacter)) {
 							charAnimStartTimes[visibleCharacterIndex] = Time.unscaledTime;
@@ -77,24 +74,6 @@ namespace Messaging {
 			}
 		}
 
-		private static void ExecuteCommandsForCurrentIndex(List<DialogueCommand> commands, int visableCharacterIndex,
-			ref float secondsPerCharacter, ref float timeOfLastCharacter) {
-			for (int i = 0; i < commands.Count; i++) {
-				DialogueCommand command = commands[i];
-				if (command.Position != visableCharacterIndex) continue;
-				switch (command.Type) {
-					case DialogueCommandType.Pause:
-						timeOfLastCharacter = Time.unscaledTime + command.FloatValue;
-						break;
-					case DialogueCommandType.TextSpeedChange:
-						secondsPerCharacter = 1f / command.FloatValue;
-						break;
-				}
-				commands.RemoveAt(i);
-				i--;
-			}
-		}
-
 		private void FinishAnimating(Action onFinish) {
 			_textAnimating = false;
 			_stopAnimating = false;
@@ -102,7 +81,7 @@ namespace Messaging {
 		}
 
 		private static bool ShouldShowNextCharacter(float secondsPerCharacter, float timeOfLastCharacter) {
-			return (Time.unscaledTime - timeOfLastCharacter) > secondsPerCharacter;
+			return Time.unscaledTime - timeOfLastCharacter > secondsPerCharacter;
 		}
 
 		public void SkipToEndOfCurrentMessage() {
