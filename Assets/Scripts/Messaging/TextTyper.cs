@@ -9,6 +9,9 @@ namespace Messaging {
 		private bool _stopAnimating;
 
 		private readonly TMP_Text _textBox;
+		
+		static readonly Color32 Clear = new(0, 0, 0, 0);
+		private const float SecondsPerCharacter = 1f / 60f;
 
 		public TextTyper(TMP_Text textBox) {
 			_textBox = textBox;
@@ -16,7 +19,7 @@ namespace Messaging {
 
 		public IEnumerator AnimateTextIn(string processedMessage, Action onFinish) {
 			_textAnimating = true;
-			float secondsPerCharacter = 1f / 150f;
+			_stopAnimating = false;
 			float timeOfLastCharacter = 0;
 
 			TMP_TextInfo textInfo = _textBox.textInfo;
@@ -50,10 +53,10 @@ namespace Messaging {
 					visibleCharacterIndex = charCount;
 					FinishAnimating(onFinish);
 				}
-				if (ShouldShowNextCharacter(secondsPerCharacter, timeOfLastCharacter)) {
+				if (ShouldShowNextCharacter(SecondsPerCharacter, timeOfLastCharacter)) {
 					if (visibleCharacterIndex <= charCount) {
 						if (visibleCharacterIndex < charCount &&
-						    ShouldShowNextCharacter(secondsPerCharacter, timeOfLastCharacter)) {
+						    ShouldShowNextCharacter(SecondsPerCharacter, timeOfLastCharacter)) {
 							charAnimStartTimes[visibleCharacterIndex] = Time.unscaledTime;
 							visibleCharacterIndex++;
 							timeOfLastCharacter = Time.unscaledTime;
@@ -62,6 +65,20 @@ namespace Messaging {
 							}
 						}
 					}
+				}
+				
+				for (int j = 0; j < charCount; j++) {
+					TMP_CharacterInfo charInfo = textInfo.characterInfo[j];
+					if (!charInfo.isVisible) continue;
+					
+					int vertexIndex = charInfo.vertexIndex;
+					int materialIndex = charInfo.materialReferenceIndex;
+					Color32[] destinationColors = textInfo.meshInfo[materialIndex].colors32;
+					Color32 theColor = j < visibleCharacterIndex ? originalColors[materialIndex][vertexIndex] : Clear;
+					destinationColors[vertexIndex + 0] = theColor;
+					destinationColors[vertexIndex + 1] = theColor;
+					destinationColors[vertexIndex + 2] = theColor;
+					destinationColors[vertexIndex + 3] = theColor;
 				}
 				
 				_textBox.UpdateVertexData(TMP_VertexDataUpdateFlags.Colors32);
