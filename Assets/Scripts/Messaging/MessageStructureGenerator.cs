@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Messaging {
@@ -6,21 +7,21 @@ namespace Messaging {
 		[SerializeField, Min(0)] private int maxVisibleMessages = 3;
 		[SerializeField, Min(0)] private int messageHeight = 16;
 
-		[SerializeField] private RectTransform messagePrefab;
-		
-		private void Awake() {
-			GenerateMessages();
-		}
+		[SerializeField] private Message messagePrefab;
 
-		private void GenerateMessages() {
+		public Message[] GenerateMessages() {
+			List<Message> messages = new();
 			for (int i = 0; i < maxVisibleMessages; i++) {
-				GenerateMessage(i * messageHeight);
+				Message message = GenerateMessage(i * messageHeight);
+				messages.Add(message);
 			}
+			return messages.ToArray();
 		}
 
-		private void GenerateMessage(int offsetY) {
-			RectTransform message = Instantiate(messagePrefab, Vector2.zero, Quaternion.identity, transform);
-			message.anchoredPosition = new Vector2(0, -offsetY);
+		private Message GenerateMessage(int offsetY) {
+			Message message = Instantiate(messagePrefab, Vector2.zero, Quaternion.identity, transform);
+			message.RectTransform.anchoredPosition = new Vector2(0, -offsetY);
+			return message;
 		}
 	}
 }
