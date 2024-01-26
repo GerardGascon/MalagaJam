@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Messaging {
@@ -9,6 +8,18 @@ namespace Messaging {
 		
 		private void Awake() {
 			_messages = messageStructureGenerator.GenerateMessages();
+		}
+
+		public void CreateMessage(string message) {
+			ModifyMessageText(message, _messages.Length - 1);
+		}
+
+		private void ModifyMessageText(string message, int index) {
+			if(index < 0) return;
+			
+			ModifyMessageText(_messages[index].Text, index - 1);
+			
+			_messages[index].SetMessageText(message);
 		}
 	}
 }
