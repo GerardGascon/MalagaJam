@@ -45,7 +45,7 @@ namespace Messaging {
 			}
 		}
 
-		public void SetMessageRealText(string text, bool animate, bool isAnswer) {
+		public Coroutine SetMessageRealText(string text, bool animate, bool isAnswer) {
 			RealText = text;
 			IsAnswer = isAnswer;
 			IsReal = true;
@@ -54,17 +54,19 @@ namespace Messaging {
 				SetText(ref answerContainer.RealTypingCoroutine, answerContainer.realMessageText,
 					answerContainer.RealTextTyper, text, animate);
 				
-				if(string.IsNullOrEmpty(text)) return;
+				if(string.IsNullOrEmpty(text)) return null;
 				answerContainer.container.SetActive(true);
 				questionContainer.container.SetActive(false);
-			} else {
-				SetText(ref questionContainer.RealTypingCoroutine, questionContainer.realMessageText,
-					questionContainer.RealTextTyper, text, animate);
-				
-				if(string.IsNullOrEmpty(text)) return;
-				questionContainer.container.SetActive(true);
-				answerContainer.container.SetActive(false);
+				return answerContainer.RealTypingCoroutine;
 			}
+			
+			SetText(ref questionContainer.RealTypingCoroutine, questionContainer.realMessageText,
+				questionContainer.RealTextTyper, text, animate);
+				
+			if(string.IsNullOrEmpty(text)) return null;
+			questionContainer.container.SetActive(true);
+			answerContainer.container.SetActive(false);
+			return questionContainer.RealTypingCoroutine;
 		}
 
 		private void SetText(ref Coroutine routine, TMP_Text tmpText, TextTyper typer, string text, bool animate) {

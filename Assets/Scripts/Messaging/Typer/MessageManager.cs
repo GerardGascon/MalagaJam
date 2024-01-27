@@ -1,7 +1,9 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Flow;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -13,16 +15,20 @@ namespace Messaging {
 
 		[SerializeField] private TextAsset[] jokes;
 		[SerializeField, Min(0)] private float sendJokeDelay = 2f;
+		[SerializeField, Min(0)] private float sendJokeLongDelay = 8f;
 		[SerializeField, Min(0)] private float initialSendJokeDelay = 4f;
 
 		private List<TextAsset> _jokesBag;
 
 		private MessageData.MessageData _currentJoke;
 		private int _currentJokeIndex;
+		
+		private Lives _lives;
 
 		private void Awake() {
 			_messages = messageStructureGenerator.GenerateMessages();
 			_jokesBag = new List<TextAsset>(jokes);
+			_lives = FindObjectOfType<Lives>();
 		}
 
 		private void Start() {
@@ -41,15 +47,27 @@ namespace Messaging {
 				_currentJokeIndex--;
 				_currentJokeIndex = Mathf.Max(_currentJokeIndex, 0);
 				if (message == _currentJoke.AnswerMessage.Key) {
-					ModifyRealMessageText(_currentJoke.QuestionMessage.Value, _currentJokeIndex, false);
-					ModifyRealMessageText(_currentJoke.AnswerMessage.Value, _messages.Length - 1, true);
-					SendRandomJoke(sendJokeDelay);
+					StartCoroutine(ShowRealTexts());
+					if(_currentJokeIndex == 0)
+						SendRandomJoke(sendJokeLongDelay);
+					else
+						SendRandomJoke(sendJokeDelay);
 				} else {
-					//TODO: Add lives support
+					_lives.Wrong();
+					if (_lives.CurrentLives == 0) {
+						StartCoroutine(ShowRealTexts());
+						SendRandomJoke(sendJokeLongDelay);
+						_lives.ResetLives();
+					}
 				}
 			} else {
 				_currentJokeIndex = _messages.Length - 1;
 			}
+		}
+
+		IEnumerator ShowRealTexts() {
+			yield return ModifyRealMessageText(_currentJoke.QuestionMessage.Value, _currentJokeIndex, false);
+			yield return ModifyRealMessageText(_currentJoke.AnswerMessage.Value, _messages.Length - 1, true);
 		}
 
 		private void ModifyMessageText(string message, int index, bool isAnswer) {
@@ -57,16 +75,16 @@ namespace Messaging {
 			_messages[index].SetMessageText(message, true, isAnswer);
 		}
 
-		private void ModifyRealMessageText(string message, int index, bool isAnswer) {
-			_messages[index].SetMessageRealText(message, true, isAnswer);
+		private Coroutine ModifyRealMessageText(string message, int index, bool isAnswer) {
+			return _messages[index].SetMessageRealText(message, true, isAnswer);
 		}
 
-		private void ModifyPreviousMessage(int index) {
+		private Coroutine ModifyPreviousMessage(int index) {
 			ModifyPreviousMessage(_messages[index].Text, _messages[index].RealText, index - 1,
 				_messages[index].IsAnswer, _messages[index].IsReal);
 
 			_messages[index].SetMessageText("", false, _messages[index].IsAnswer);
-			_messages[index].SetMessageRealText("", false, _messages[index].IsAnswer);
+			return _messages[index].SetMessageRealText("", false, _messages[index].IsAnswer);
 		}
 
 		private MessageData.MessageData GetRandomJoke() {

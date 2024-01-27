@@ -24,6 +24,9 @@ namespace Messaging.Typer {
 				if (ShouldShowNextCharacter(timeOfLastCharacter)) {
 					if (_textBox.maxVisibleCharacters <= _textBox.textInfo.characterCount) {
 						_textBox.maxVisibleCharacters++;
+						if (_textBox.text[_textBox.maxVisibleCharacters - 1] == ' ') {
+							_textBox.maxVisibleCharacters++;
+						}
 						timeOfLastCharacter = Time.unscaledTime;
 						if (_textBox.maxVisibleCharacters == _textBox.textInfo.characterCount) {
 							onFinish?.Invoke();

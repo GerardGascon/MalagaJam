@@ -1715,6 +1715,7 @@ GameObject:
   - component: {fileID: 1637937847}
   - component: {fileID: 1637937846}
   - component: {fileID: 1637937845}
+  - component: {fileID: 1637937849}
   m_Layer: 5
   m_Name: TriesCanvas
   m_TagString: Untagged
@@ -1805,6 +1806,24 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1637937849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1637937844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ac00191cb424148b6fbefc0c595175b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lives:
+  - {fileID: 780374632}
+  - {fileID: 279922736}
+  - {fileID: 590262795}
+  correctLive: {fileID: -773788709396254583, guid: 128ff2869c2580344a74d2dc6b9d9e6a, type: 3}
+  wrongLive: {fileID: -8337258921713572487, guid: 128ff2869c2580344a74d2dc6b9d9e6a, type: 3}
 --- !u!1 &1717907689
 GameObject:
   m_ObjectHideFlags: 0
@@ -2076,6 +2095,7 @@ MonoBehaviour:
   - {fileID: 4900000, guid: bf2ae237b56a65648a26e0fc41a94d8a, type: 3}
   - {fileID: 4900000, guid: ec37bca099ef3e847b3be147fcfe4d9e, type: 3}
   sendJokeDelay: 2
+  sendJokeLongDelay: 8
   initialSendJokeDelay: 4
 --- !u!1001 &1825731470
 PrefabInstance:
