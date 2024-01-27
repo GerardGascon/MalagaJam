@@ -2064,7 +2064,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   messageStructureGenerator: {fileID: 1079303793}
-  textAsset: {fileID: 4900000, guid: 709db39fbdad6d64d913304ea83d7f85, type: 3}
+  jokes:
+  - {fileID: 4900000, guid: 709db39fbdad6d64d913304ea83d7f85, type: 3}
+  sendJokeDelay: 2
+  initialSendJokeDelay: 4
 --- !u!1001 &1825731470
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2457,8 +2460,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 16
+  m_fontSizeBase: 16
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2521,11 +2524,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 507035066}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 107.76931, y: -159.5}
-  m_SizeDelta: {x: 439.3386, y: 50}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 16, y: -212}
+  m_SizeDelta: {x: 258, y: 32}
+  m_Pivot: {x: 0, y: 1}
 --- !u!1001 &2129526353
 PrefabInstance:
   m_ObjectHideFlags: 0

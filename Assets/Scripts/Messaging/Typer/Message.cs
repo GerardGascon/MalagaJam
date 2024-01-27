@@ -32,12 +32,14 @@ namespace Messaging {
 				SetText(ref answerContainer.TypingCoroutine, answerContainer.messageText, answerContainer.TextTyper,
 					text, animate);
 				
+				if(string.IsNullOrEmpty(text)) return;
 				answerContainer.container.SetActive(true);
 				questionContainer.container.SetActive(false);
 			} else {
 				SetText(ref questionContainer.TypingCoroutine, questionContainer.messageText,
 					questionContainer.TextTyper, text, animate);
 				
+				if(string.IsNullOrEmpty(text)) return;
 				questionContainer.container.SetActive(true);
 				answerContainer.container.SetActive(false);
 			}
@@ -52,12 +54,14 @@ namespace Messaging {
 				SetText(ref answerContainer.RealTypingCoroutine, answerContainer.realMessageText,
 					answerContainer.RealTextTyper, text, animate);
 				
+				if(string.IsNullOrEmpty(text)) return;
 				answerContainer.container.SetActive(true);
 				questionContainer.container.SetActive(false);
 			} else {
 				SetText(ref questionContainer.RealTypingCoroutine, questionContainer.realMessageText,
 					questionContainer.RealTextTyper, text, animate);
 				
+				if(string.IsNullOrEmpty(text)) return;
 				questionContainer.container.SetActive(true);
 				answerContainer.container.SetActive(false);
 			}

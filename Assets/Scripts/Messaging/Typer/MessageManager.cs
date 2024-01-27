@@ -1,7 +1,9 @@
 using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Messaging {
 	public class MessageManager : MonoBehaviour {
@@ -9,24 +11,21 @@ namespace Messaging {
 
 		private Message[] _messages;
 
-		[SerializeField] private TextAsset textAsset;
+		[SerializeField] private TextAsset[] jokes;
+		[SerializeField, Min(0)] private float sendJokeDelay = 2f;
+		[SerializeField, Min(0)] private float initialSendJokeDelay = 4f;
+
+		private List<TextAsset> jokesBag;
 
 		private void Awake() {
 			_messages = messageStructureGenerator.GenerateMessages();
+			jokesBag = new List<TextAsset>(jokes);
 		}
 
 		private async void Start() {
-			MessageData.MessageData data = new(textAsset.text);
-			int i = 0;
-			while (Application.isPlaying) {
-				bool isAnswer = i % 2 != 0;
-
-				CreateMessage(data.QuestionMessage.Key, isAnswer);
-				await Task.Delay(2000);
-				CreateRealMessage(data.QuestionMessage.Value, isAnswer);
-				await Task.Delay(2000);
-				++i;
-			}
+			MessageData.MessageData joke = GetRandomJoke();
+			await Task.Delay((int)(initialSendJokeDelay * 1000));
+			CreateMessage(joke.QuestionMessage.Key, false);
 		}
 
 		public void CreateMessage(string message, bool isAnswer) {
@@ -52,6 +51,14 @@ namespace Messaging {
 
 			_messages[index].SetMessageText("", false, _messages[index].IsAnswer);
 			_messages[index].SetMessageRealText("", false, _messages[index].IsAnswer);
+		}
+
+		private MessageData.MessageData GetRandomJoke() {
+			TextAsset joke = jokesBag[Random.Range(0, jokesBag.Count)];
+			if (jokesBag.Count == 0)
+				jokesBag = new List<TextAsset>(jokes);
+
+			return new MessageData.MessageData(joke.text);
 		}
 
 		private void ModifyPreviousMessage(string message, string realMessage, int index, bool isAnswer, bool isReal) {
