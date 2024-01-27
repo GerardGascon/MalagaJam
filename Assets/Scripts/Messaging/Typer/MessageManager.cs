@@ -15,23 +15,23 @@ namespace Messaging {
 		[SerializeField, Min(0)] private float sendJokeDelay = 2f;
 		[SerializeField, Min(0)] private float initialSendJokeDelay = 4f;
 
-		private List<TextAsset> jokesBag;
+		private List<TextAsset> _jokesBag;
 
 		private MessageData.MessageData _currentJoke;
 		private int _currentJokeIndex;
 
 		private void Awake() {
 			_messages = messageStructureGenerator.GenerateMessages();
-			jokesBag = new List<TextAsset>(jokes);
+			_jokesBag = new List<TextAsset>(jokes);
 		}
 
 		private void Start() {
-			SendRandomJoke();
+			SendRandomJoke(initialSendJokeDelay);
 		}
 
-		private async void SendRandomJoke() {
+		private async void SendRandomJoke(float delay) {
 			_currentJoke = GetRandomJoke();
-			await Task.Delay((int)(initialSendJokeDelay * 1000));
+			await Task.Delay((int)(delay * 1000));
 			CreateMessage(_currentJoke.QuestionMessage.Key, false);
 		}
 
@@ -43,7 +43,7 @@ namespace Messaging {
 				if (message == _currentJoke.AnswerMessage.Key) {
 					ModifyRealMessageText(_currentJoke.QuestionMessage.Value, _currentJokeIndex, false);
 					ModifyRealMessageText(_currentJoke.AnswerMessage.Value, _messages.Length - 1, true);
-					SendRandomJoke();
+					SendRandomJoke(sendJokeDelay);
 				} else {
 					//TODO: Add lives support
 				}
@@ -70,9 +70,9 @@ namespace Messaging {
 		}
 
 		private MessageData.MessageData GetRandomJoke() {
-			TextAsset joke = jokesBag[Random.Range(0, jokesBag.Count)];
-			if (jokesBag.Count == 0)
-				jokesBag = new List<TextAsset>(jokes);
+			TextAsset joke = _jokesBag[Random.Range(0, _jokesBag.Count)];
+			if (_jokesBag.Count == 0)
+				_jokesBag = new List<TextAsset>(jokes);
 
 			return new MessageData.MessageData(joke.text);
 		}
