@@ -6,6 +6,8 @@ namespace Messaging.Composer {
 	public class InputField : MonoBehaviour {
 		[SerializeField] private TMP_Text fieldText;
 
+		public string Text => fieldText.text;
+
 		public void EmptyText() {
 			fieldText.SetText("");
 		}

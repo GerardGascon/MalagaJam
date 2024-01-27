@@ -16,14 +16,14 @@ namespace Messaging {
 		}
 
 		private async void Start() {
-			string[] fLines = textAsset.text.Split(':');
+			MessageData.MessageData data = new(textAsset.text);
 			int i = 0;
 			while (Application.isPlaying) {
 				bool isAnswer = i % 2 != 0;
 
-				CreateMessage(MessageParser.SplitMessage(fLines[i % 2]).Key, isAnswer);
+				CreateMessage(data.QuestionMessage.Key, isAnswer);
 				await Task.Delay(2000);
-				CreateRealMessage(MessageParser.SplitMessage(fLines[i % 2]).Value, isAnswer);
+				CreateRealMessage(data.QuestionMessage.Value, isAnswer);
 				await Task.Delay(2000);
 				++i;
 			}
