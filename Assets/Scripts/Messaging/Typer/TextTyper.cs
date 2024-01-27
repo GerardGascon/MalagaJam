@@ -3,14 +3,11 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 
-namespace Messaging {
+namespace Messaging.Typer {
 	public class TextTyper {
-		private bool _textAnimating;
-		private bool _stopAnimating;
-
 		private readonly TMP_Text _textBox;
-		
-		static readonly Color32 Clear = new(0, 0, 0, 0);
+
+		private static readonly Color32 Clear = new(0, 0, 0, 0);
 		private const float SecondsPerCharacter = 1f / 60f;
 
 		public TextTyper(TMP_Text textBox) {
@@ -18,8 +15,6 @@ namespace Messaging {
 		}
 
 		public IEnumerator AnimateTextIn(string processedMessage, Action onFinish) {
-			_textAnimating = true;
-			_stopAnimating = false;
 			float timeOfLastCharacter = 0;
 
 			TMP_TextInfo textInfo = _textBox.textInfo;
@@ -40,28 +35,16 @@ namespace Messaging {
 				Array.Copy(theColors, originalColors[i], theColors.Length);
 			}
 			int charCount = textInfo.characterCount;
-			float[] charAnimStartTimes = new float[charCount];
-			for (int i = 0; i < charCount; i++) {
-				charAnimStartTimes[i] = -1;
-			}
 			int visibleCharacterIndex = 0;
 			while (true) {
-				if (_stopAnimating) {
-					for (int i = visibleCharacterIndex; i < charCount; i++) {
-						charAnimStartTimes[i] = Time.unscaledTime;
-					}
-					visibleCharacterIndex = charCount;
-					FinishAnimating(onFinish);
-				}
 				if (ShouldShowNextCharacter(SecondsPerCharacter, timeOfLastCharacter)) {
 					if (visibleCharacterIndex <= charCount) {
 						if (visibleCharacterIndex < charCount &&
 						    ShouldShowNextCharacter(SecondsPerCharacter, timeOfLastCharacter)) {
-							charAnimStartTimes[visibleCharacterIndex] = Time.unscaledTime;
 							visibleCharacterIndex++;
 							timeOfLastCharacter = Time.unscaledTime;
 							if (visibleCharacterIndex == charCount) {
-								FinishAnimating(onFinish);
+								onFinish?.Invoke();
 							}
 						}
 					}
@@ -87,28 +70,17 @@ namespace Messaging {
 					theInfo.mesh.vertices = theInfo.vertices;
 					_textBox.UpdateGeometry(theInfo.mesh, i);
 				}
+				
+				if (visibleCharacterIndex == charCount) {
+					break;
+				}
+				
 				yield return null;
 			}
 		}
 
-		private void FinishAnimating(Action onFinish) {
-			_textAnimating = false;
-			_stopAnimating = false;
-			onFinish?.Invoke();
-		}
-
 		private static bool ShouldShowNextCharacter(float secondsPerCharacter, float timeOfLastCharacter) {
 			return Time.unscaledTime - timeOfLastCharacter > secondsPerCharacter;
-		}
-
-		public void SkipToEndOfCurrentMessage() {
-			if (_textAnimating) {
-				_stopAnimating = true;
-			}
-		}
-
-		public bool IsMessageAnimating() {
-			return _textAnimating;
 		}
 	}
 }

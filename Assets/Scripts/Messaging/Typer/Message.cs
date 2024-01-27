@@ -1,4 +1,5 @@
 using System;
+using Messaging.Typer;
 using TMPro;
 using UnityEngine;
 using Utilities;
@@ -19,9 +20,6 @@ namespace Messaging {
 		}
 
 		public void SetMessageText(string text, bool animate) {
-			if (_textTyper.IsMessageAnimating()) {
-				_textTyper.SkipToEndOfCurrentMessage();
-			}
 			this.EnsureCoroutineStopped(ref _typingCoroutine);
 
 			if (animate)
