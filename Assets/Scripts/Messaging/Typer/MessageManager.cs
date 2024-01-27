@@ -1,10 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Flow;
+using Messaging.Composer;
 using UnityEngine;
+using Utilities;
 using Random = UnityEngine.Random;
 
 namespace Messaging {
@@ -25,10 +28,15 @@ namespace Messaging {
 		
 		private Lives _lives;
 
+		private readonly Regex _emojiGetter = new("<([a-z]+)(?![^>]*\\/>)[^>]*>");
+		private const int NumEmojis = 34;
+		private EmojiButtonManager _emojiButtonManager;
+
 		private void Awake() {
 			_messages = messageStructureGenerator.GenerateMessages();
 			_jokesBag = new List<TextAsset>(jokes);
 			_lives = FindObjectOfType<Lives>();
+			_emojiButtonManager = FindObjectOfType<EmojiButtonManager>();
 		}
 
 		private void Start() {
@@ -40,6 +48,7 @@ namespace Messaging {
 			await Task.Delay((int)(delay * 1000));
 			_currentJoke = GetRandomJoke();
 			CreateMessage(_currentJoke.QuestionMessage.Key, false);
+			_emojiButtonManager.SetButtonImages(GenerateButtonOptions());
 		}
 
 		public void CreateMessage(string message, bool isAnswer) {
@@ -66,9 +75,35 @@ namespace Messaging {
 			}
 		}
 
-		IEnumerator ShowRealTexts() {
+		private IEnumerator ShowRealTexts() {
 			yield return ModifyRealMessageText(_currentJoke.QuestionMessage.Value, _currentJokeIndex, false);
 			yield return ModifyRealMessageText(_currentJoke.AnswerMessage.Value, _messages.Length - 1, true);
+		}
+
+		private string[] GenerateButtonOptions() {
+			List<string> neededEmojis = GetResultEmojis();
+
+			while (neededEmojis.Count < 6) {
+				string emoji;
+				do {
+					emoji = $"<sprite={Random.Range(0, NumEmojis)}>";
+				} while (neededEmojis.Contains(emoji));
+				neededEmojis.Add(emoji);
+			}
+
+			neededEmojis.Shuffle();
+			return neededEmojis.ToArray();
+		}
+
+		private List<string> GetResultEmojis() {
+			MatchCollection emojis = _emojiGetter.Matches(_currentJoke.AnswerMessage.Key);
+
+			List<string> emojiStrings = new();
+			foreach (Match emoji in emojis) {
+				emojiStrings.Add(emoji.Value);
+			}
+
+			return emojiStrings;
 		}
 
 		private void ModifyMessageText(string message, int index, bool isAnswer) {
@@ -80,12 +115,12 @@ namespace Messaging {
 			return _messages[index].SetMessageRealText(message, true, isAnswer);
 		}
 
-		private Coroutine ModifyPreviousMessage(int index) {
+		private void ModifyPreviousMessage(int index) {
 			ModifyPreviousMessage(_messages[index].Text, _messages[index].RealText, index - 1,
 				_messages[index].IsAnswer, _messages[index].IsReal);
 
 			_messages[index].SetMessageText("", false, _messages[index].IsAnswer);
-			return _messages[index].SetMessageRealText("", false, _messages[index].IsAnswer);
+			_messages[index].SetMessageRealText("", false, _messages[index].IsAnswer);
 		}
 
 		private MessageData.MessageData GetRandomJoke() {
