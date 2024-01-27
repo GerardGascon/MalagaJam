@@ -8,10 +8,6 @@ namespace Messaging.Composer {
 
 		public string Text => fieldText.text;
 
-		public void EmptyText() {
-			fieldText.SetText("");
-		}
-		
 		public void WriteEmoji(string emoji) {
 			fieldText.text += emoji;
 		}
@@ -21,6 +17,10 @@ namespace Messaging.Composer {
 		public void RemoveEmoji() {
 			string newText = _removeRegex.Replace(fieldText.text, "");
 			fieldText.SetText(newText);
+		}
+
+		public void ClearText() {
+			fieldText.SetText("");
 		}
 	}
 }

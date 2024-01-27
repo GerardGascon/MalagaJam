@@ -2065,7 +2065,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   messageStructureGenerator: {fileID: 1079303793}
   jokes:
-  - {fileID: 4900000, guid: 709db39fbdad6d64d913304ea83d7f85, type: 3}
+  - {fileID: 4900000, guid: c585a95f4d115b445b82535bda5f460c, type: 3}
+  - {fileID: 4900000, guid: a6e549c30cb55c64d85cda64b3e5f264, type: 3}
+  - {fileID: 4900000, guid: 4eea457582b04f640b48b613312e90ae, type: 3}
+  - {fileID: 4900000, guid: 8f6e8913745efbd478f88445cb4bacdd, type: 3}
+  - {fileID: 4900000, guid: dfe2ad8536db02b458922f1d656549fb, type: 3}
+  - {fileID: 4900000, guid: 7f0889a12268baf4dae1dcdc69e4b6a4, type: 3}
+  - {fileID: 4900000, guid: ad10d007892f39943a2e9b4f9a0d98cb, type: 3}
+  - {fileID: 4900000, guid: d0647985eae927441a5b4a0b854f0eee, type: 3}
+  - {fileID: 4900000, guid: bf2ae237b56a65648a26e0fc41a94d8a, type: 3}
+  - {fileID: 4900000, guid: ec37bca099ef3e847b3be147fcfe4d9e, type: 3}
   sendJokeDelay: 2
   initialSendJokeDelay: 4
 --- !u!1001 &1825731470

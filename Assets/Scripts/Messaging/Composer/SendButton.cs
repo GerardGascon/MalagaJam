@@ -15,6 +15,7 @@ namespace Messaging.Composer {
 		public void SendEmojis() {
 			if (CanSendText()) {
 				_messageManager.CreateMessage(inputField.Text, true);
+				inputField.ClearText();
 			}
 		}
 

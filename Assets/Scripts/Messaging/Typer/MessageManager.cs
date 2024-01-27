@@ -17,23 +17,39 @@ namespace Messaging {
 
 		private List<TextAsset> jokesBag;
 
+		private MessageData.MessageData _currentJoke;
+		private int _currentJokeIndex;
+
 		private void Awake() {
 			_messages = messageStructureGenerator.GenerateMessages();
 			jokesBag = new List<TextAsset>(jokes);
 		}
 
-		private async void Start() {
-			MessageData.MessageData joke = GetRandomJoke();
+		private void Start() {
+			SendRandomJoke();
+		}
+
+		private async void SendRandomJoke() {
+			_currentJoke = GetRandomJoke();
 			await Task.Delay((int)(initialSendJokeDelay * 1000));
-			CreateMessage(joke.QuestionMessage.Key, false);
+			CreateMessage(_currentJoke.QuestionMessage.Key, false);
 		}
 
 		public void CreateMessage(string message, bool isAnswer) {
 			ModifyMessageText(message, _messages.Length - 1, isAnswer);
-		}
-
-		public void CreateRealMessage(string message, bool isAnswer) {
-			ModifyRealMessageText(message, _messages.Length - 1, isAnswer);
+			if (isAnswer) {
+				_currentJokeIndex--;
+				_currentJokeIndex = Mathf.Max(_currentJokeIndex, 0);
+				if (message == _currentJoke.AnswerMessage.Key) {
+					ModifyRealMessageText(_currentJoke.QuestionMessage.Value, _currentJokeIndex, false);
+					ModifyRealMessageText(_currentJoke.AnswerMessage.Value, _messages.Length - 1, true);
+					SendRandomJoke();
+				} else {
+					//TODO: Add lives support
+				}
+			} else {
+				_currentJokeIndex = _messages.Length - 1;
+			}
 		}
 
 		private void ModifyMessageText(string message, int index, bool isAnswer) {
