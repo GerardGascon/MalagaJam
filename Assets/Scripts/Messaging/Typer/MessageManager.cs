@@ -125,6 +125,7 @@ namespace Messaging {
 
 		private MessageData.MessageData GetRandomJoke() {
 			TextAsset joke = _jokesBag[Random.Range(0, _jokesBag.Count)];
+			_jokesBag.Remove(joke);
 			if (_jokesBag.Count == 0)
 				_jokesBag = new List<TextAsset>(jokes);
 
