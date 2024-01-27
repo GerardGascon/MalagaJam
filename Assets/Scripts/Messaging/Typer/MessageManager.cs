@@ -36,8 +36,9 @@ namespace Messaging {
 		}
 
 		private async void SendRandomJoke(float delay) {
-			_currentJoke = GetRandomJoke();
+			//TODO: Lock send button here
 			await Task.Delay((int)(delay * 1000));
+			_currentJoke = GetRandomJoke();
 			CreateMessage(_currentJoke.QuestionMessage.Key, false);
 		}
 
