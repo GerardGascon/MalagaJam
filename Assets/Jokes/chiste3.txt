@@ -1,0 +1,1 @@
+<sprite=30><sprite=33><sprite=29><sprite=25>|¿Por qué la gallina cuida a su pollito?:<sprite=31><sprite=34>|Porque le costó un huevo.

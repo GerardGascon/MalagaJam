@@ -1,0 +1,1 @@
+<sprite=26><sprite=28><sprite=25>|¿Has visto mistetas?:<sprite=22><sprite=23><sprite=19><sprite=26>|No, pero me gustaría verlas.
