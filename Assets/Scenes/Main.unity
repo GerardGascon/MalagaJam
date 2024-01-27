@@ -1276,6 +1276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   messageStructureGenerator: {fileID: 1079303793}
+  textAsset: {fileID: 4900000, guid: 709db39fbdad6d64d913304ea83d7f85, type: 3}
 --- !u!1001 &1869765660
 PrefabInstance:
   m_ObjectHideFlags: 0
