@@ -1,0 +1,1 @@
+<sprite=9><sprite=25>|¿Qué hace un volcan?:<sprite=10>|Pues lava.

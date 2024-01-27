@@ -1,1 +1,1 @@
-<sprite=27><sprite=24><sprite=27><sprite=25>|¿Qué le dice un gusano a otro?:<sprite=8><sprite=21>
+<sprite=27><sprite=24><sprite=27><sprite=25>|¿Qué le dice un gusano a otro?:<sprite=8><sprite=21>|¿Una vuelta a la manzana?

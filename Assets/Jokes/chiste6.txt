@@ -1,0 +1,1 @@
+<sprite=12><sprite=16><sprite=25>|¿Cómo se queda un mago después de comer?:<sprite=12><sprite=11>|Magordito.

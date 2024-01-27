@@ -1,0 +1,1 @@
+<sprite=14><sprite=24><sprite=14><sprite=25>|¿Qué le dice un semaforo a otro?:<sprite=22><sprite=26><sprite=13>|No me mires que me estoy cambiando.

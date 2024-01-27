@@ -1,0 +1,1 @@
+<sprite=19><sprite=1><sprite=25>|¿Te gusta la informatica?:<sprite=0><sprite=2>|Mouse o menos.
