@@ -16,21 +16,16 @@ namespace Messaging.Typer {
 		public IEnumerator AnimateTextIn(string processedMessage, Action onFinish) {
 			float timeOfLastCharacter = 0;
 
-			TMP_TextInfo textInfo = _textBox.textInfo;
-
 			_textBox.maxVisibleCharacters = 0;
 			_textBox.text = processedMessage;
 			_textBox.ForceMeshUpdate();
 
-			int charCount = textInfo.characterCount;
-			int visibleCharacterIndex = 0;
 			while (true) {
-				if (ShouldShowNextCharacter(SecondsPerCharacter, timeOfLastCharacter)) {
-					if (visibleCharacterIndex <= charCount) {
-						visibleCharacterIndex++;
-						_textBox.maxVisibleCharacters = visibleCharacterIndex;
+				if (ShouldShowNextCharacter(timeOfLastCharacter)) {
+					if (_textBox.maxVisibleCharacters <= _textBox.textInfo.characterCount) {
+						_textBox.maxVisibleCharacters++;
 						timeOfLastCharacter = Time.unscaledTime;
-						if (visibleCharacterIndex == charCount) {
+						if (_textBox.maxVisibleCharacters == _textBox.textInfo.characterCount) {
 							onFinish?.Invoke();
 							break;
 						}
@@ -41,8 +36,8 @@ namespace Messaging.Typer {
 			}
 		}
 
-		private static bool ShouldShowNextCharacter(float secondsPerCharacter, float timeOfLastCharacter) {
-			return Time.unscaledTime - timeOfLastCharacter > secondsPerCharacter;
+		private static bool ShouldShowNextCharacter(float timeOfLastCharacter) {
+			return Time.unscaledTime - timeOfLastCharacter > SecondsPerCharacter;
 		}
 	}
 }

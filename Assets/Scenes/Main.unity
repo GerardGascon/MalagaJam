@@ -891,7 +891,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ce276be77304236a23df45b19b4cc08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxVisibleMessages: 3
+  maxVisibleMessages: 5
   messageHeight: 16
   messagePrefab: {fileID: -6056302822753658535, guid: 6bf006df27e33a24088a28c9d46dbb43, type: 3}
 --- !u!1 &1284257431
