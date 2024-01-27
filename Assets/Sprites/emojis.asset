@@ -279,6 +279,18 @@ MonoBehaviour:
     m_Scale: 1
     m_Name: emojis_32
     m_HashCode: 1466336361
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 33
+    m_Scale: 1
+    m_Name: emojis_33
+    m_HashCode: 1466336360
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 34
+    m_Scale: 1
+    m_Name: emojis_34
+    m_HashCode: 1466336367
   m_SpriteGlyphTable:
   - m_Index: 0
     m_Metrics:
@@ -808,5 +820,37 @@ MonoBehaviour:
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
     sprite: {fileID: 796189935, guid: 8ae36a4b17d221c4ead37cb5a361d758, type: 3}
+  - m_Index: 33
+    m_Metrics:
+      m_Width: 16
+      m_Height: 16
+      m_HorizontalBearingX: 0.5
+      m_HorizontalBearingY: 14
+      m_HorizontalAdvance: 16
+    m_GlyphRect:
+      m_X: 64
+      m_Y: 238
+      m_Width: 16
+      m_Height: 16
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+    sprite: {fileID: -2107887754, guid: 8ae36a4b17d221c4ead37cb5a361d758, type: 3}
+  - m_Index: 34
+    m_Metrics:
+      m_Width: 16
+      m_Height: 16
+      m_HorizontalBearingX: 0.5
+      m_HorizontalBearingY: 14
+      m_HorizontalAdvance: 16
+    m_GlyphRect:
+      m_X: 80
+      m_Y: 238
+      m_Width: 16
+      m_Height: 16
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+    sprite: {fileID: -113662094, guid: 8ae36a4b17d221c4ead37cb5a361d758, type: 3}
   spriteInfoList: []
   fallbackSpriteAssets: []

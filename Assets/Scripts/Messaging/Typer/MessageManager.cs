@@ -29,7 +29,7 @@ namespace Messaging {
 		private Lives _lives;
 
 		private readonly Regex _emojiGetter = new("<([a-z]+)(?![^>]*\\/>)[^>]*>");
-		private const int NumEmojis = 34;
+		private const int NumEmojis = 35;
 		private EmojiButtonManager _emojiButtonManager;
 
 		private void Awake() {
