@@ -97,6 +97,7 @@ namespace Messaging {
 
 		private List<string> GetResultEmojis() {
 			MatchCollection emojis = _emojiGetter.Matches(_currentJoke.AnswerMessage.Key);
+			FindObjectOfType<InputField>().NumberIcons = emojis.Count;
 
 			List<string> emojiStrings = new();
 			foreach (Match emoji in emojis) {
