@@ -3303,6 +3303,8 @@ MonoBehaviour:
   - {fileID: 4900000, guid: d0647985eae927441a5b4a0b854f0eee, type: 3}
   - {fileID: 4900000, guid: bf2ae237b56a65648a26e0fc41a94d8a, type: 3}
   - {fileID: 4900000, guid: ec37bca099ef3e847b3be147fcfe4d9e, type: 3}
+  - {fileID: 4900000, guid: 7512f44f959573d49a230ee8753d1515, type: 3}
+  - {fileID: 4900000, guid: 45354350dd0f4d042af5f2e8e2a0d0b2, type: 3}
   sendJokeDelay: 2
   initialSendJokeDelay: 4
 --- !u!1001 &1825731470
