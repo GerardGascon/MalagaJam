@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Audio;
 using TMPro;
 using UnityEngine;
 
@@ -23,6 +24,7 @@ namespace Messaging.Typer {
 			while (true) {
 				if (ShouldShowNextCharacter(timeOfLastCharacter)) {
 					if (_textBox.maxVisibleCharacters <= _textBox.textInfo.characterCount) {
+						AudioManager.instance.PlayOneShot("escribir");
 						_textBox.maxVisibleCharacters++;
 						if (_textBox.text[_textBox.maxVisibleCharacters - 1] == ' ') {
 							_textBox.maxVisibleCharacters++;

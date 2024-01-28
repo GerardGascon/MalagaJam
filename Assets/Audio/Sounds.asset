@@ -66,7 +66,7 @@ MonoBehaviour:
     volume: 1
     volumeVariance: 0
     pitch: 1
-    pitchVariance: 0
+    pitchVariance: 0.1
     loop: 0
     source: {fileID: 0}
   - name: hover
@@ -75,7 +75,7 @@ MonoBehaviour:
     volume: 1
     volumeVariance: 0
     pitch: 1
-    pitchVariance: 0
+    pitchVariance: 0.1
     loop: 0
     source: {fileID: 0}
   - name: recibir_mensaje

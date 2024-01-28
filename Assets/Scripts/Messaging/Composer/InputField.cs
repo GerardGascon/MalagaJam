@@ -1,4 +1,5 @@
 using System.Text.RegularExpressions;
+using Audio;
 using TMPro;
 using UnityEngine;
 
@@ -24,6 +25,7 @@ namespace Messaging.Composer {
 		private readonly Regex _removeRegex = new(@"<([a-z]+)(?![^>]*\/>)[^>]*>(?!.*<([a-z]+)(?![^>]*\/>)[^>]*>)");
 		
 		public void WriteEmoji(string emoji) {
+			AudioManager.instance.PlayOneShot("click");
 			if (GetRemainingIcons() <= 0) return;
 			
 			_iconsWritten++;
@@ -34,6 +36,7 @@ namespace Messaging.Composer {
 		private int GetRemainingIcons() => _numberIcons - _iconsWritten;
 
 		public void RemoveEmoji() {
+			AudioManager.instance.PlayOneShot("borrar");
 			string newText = _removeRegex.Replace(fieldText.text, "");
 			if (newText != fieldText.text) {
 				_iconsWritten--;

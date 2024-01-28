@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Audio;
 using Flow;
 using Messaging.Composer;
 using UnityEngine;
@@ -50,6 +51,7 @@ namespace Messaging {
 			_sendButton.Unlock();
 			
 			_currentJoke = GetRandomJoke();
+			AudioManager.instance.PlayOneShot("recibir_mensaje");
 			CreateMessage(_currentJoke.QuestionMessage.Key, false);
 			_emojiButtonManager.SetButtonImages(GenerateButtonOptions());
 		}
@@ -61,6 +63,7 @@ namespace Messaging {
 			_sendButton.Unlock();
 			
 			_currentJoke = GetRandomJoke();
+			AudioManager.instance.PlayOneShot("recibir_mensaje");
 			CreateMessage(_currentJoke.QuestionMessage.Key, false);
 			_emojiButtonManager.SetButtonImages(GenerateButtonOptions());
 		}
@@ -72,23 +75,24 @@ namespace Messaging {
 				_currentJokeIndex = Mathf.Max(_currentJokeIndex, 0);
 				if (message == _currentJoke.AnswerMessage.Key) {
 					_sendButton.Lock();
-					bool isCorrect = _currentJokeIndex != 0;
 					
-					if (isCorrect) {
-						if (FindObjectOfType<ProgressBar>().AddProgress())
-							return;
-					}
+					AudioManager.instance.Play("correcto");
+					if (FindObjectOfType<ProgressBar>().AddProgress())
+						return;
 					
-					Coroutine routine = StartCoroutine(ShowRealTexts(isCorrect));
+					Coroutine routine = StartCoroutine(ShowRealTexts(true));
 					StartCoroutine(SendRandomJoke(routine, sendJokeDelay));
 					_lives.ResetLives();
 				} else {
 					_lives.Wrong();
 					if (_lives.CurrentLives == 0) {
+						AudioManager.instance.Play("3fallos");
 						_sendButton.Lock();
 						Coroutine routine = StartCoroutine(ShowRealTexts(false));
 						StartCoroutine(SendRandomJoke(routine, initialSendJokeDelay));
 						_lives.ResetLives();
+					} else {
+						AudioManager.instance.Play("zumbido");
 					}
 				}
 			} else {
