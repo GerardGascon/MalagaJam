@@ -24,6 +24,15 @@ MonoBehaviour:
     pitchVariance: 0
     loop: 1
     source: {fileID: 0}
+  - name: Menu
+    clip: {fileID: 8300000, guid: 008c3733e8c61db46a14c3ed247ba10b, type: 3}
+    type: 0
+    volume: 1
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 1
+    source: {fileID: 0}
   - name: 3fallos
     clip: {fileID: 8300000, guid: 9e416ecd3b54c2147bd3e0634798ec7d, type: 3}
     type: 1

@@ -6,10 +6,12 @@ using UnityEngine.SceneManagement;
 namespace Flow {
 	public class MainMenu : MonoBehaviour {
 		private void Start() {
-			AudioManager.instance.Play("Musica");
+			AudioManager.instance.Play("Menu");
 		}
 		
 		public void LoadGame() {
+			AudioManager.instance.FadeOut("Menu", 1f);
+			AudioManager.instance.FadeIn("Musica", 1f);
 			SceneManager.LoadScene(sceneBuildIndex: 1);
 		}
 		
