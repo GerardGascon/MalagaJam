@@ -31,12 +31,14 @@ namespace Messaging {
 		private readonly Regex _emojiGetter = new("<([a-z]+)(?![^>]*\\/>)[^>]*>");
 		private const int NumEmojis = 35;
 		private EmojiButtonManager _emojiButtonManager;
+		private SendButton _sendButton;
 
 		private void Awake() {
 			_messages = messageStructureGenerator.GenerateMessages();
 			_jokesBag = new List<TextAsset>(jokes);
 			_lives = FindObjectOfType<Lives>();
 			_emojiButtonManager = FindObjectOfType<EmojiButtonManager>();
+			_sendButton = FindObjectOfType<SendButton>();
 		}
 
 		private void Start() {
@@ -44,8 +46,10 @@ namespace Messaging {
 		}
 
 		private async void SendRandomJoke(float delay) {
-			//TODO: Lock send button here
+			_sendButton.Lock();
 			await Task.Delay((int)(delay * 1000));
+			_sendButton.Unlock();
+			
 			_currentJoke = GetRandomJoke();
 			CreateMessage(_currentJoke.QuestionMessage.Key, false);
 			_emojiButtonManager.SetButtonImages(GenerateButtonOptions());
