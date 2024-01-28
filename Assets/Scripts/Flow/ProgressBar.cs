@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,7 +24,7 @@ namespace Flow {
 
 		private void UpdateFill() {
 			float fillPercentage = _progressDone / (float)numberToWin;
-			bar.fillAmount = fillPercentage;
+			bar.DOFillAmount(fillPercentage, .25f);
 		}
 	}
 }
