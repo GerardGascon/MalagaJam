@@ -2178,7 +2178,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!225 &1198578935
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -3289,7 +3289,6 @@ MonoBehaviour:
   - {fileID: 4900000, guid: bf2ae237b56a65648a26e0fc41a94d8a, type: 3}
   - {fileID: 4900000, guid: ec37bca099ef3e847b3be147fcfe4d9e, type: 3}
   sendJokeDelay: 2
-  sendJokeLongDelay: 8
   initialSendJokeDelay: 4
 --- !u!1001 &1825731470
 PrefabInstance:

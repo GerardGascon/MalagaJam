@@ -31,8 +31,8 @@ namespace Audio {
 				};
 				s.source = sound.AddComponent<AudioSource>();
 
-				if (soundList.mainMixer && soundList.sfxMixer) {
-					s.source.outputAudioMixerGroup = s.type == Sounds.List.Type.Music ? soundList.mainMixer : soundList.sfxMixer;
+				if (soundList.musicMixer && soundList.sfxMixer) {
+					s.source.outputAudioMixerGroup = s.type == Sounds.List.Type.Music ? soundList.musicMixer : soundList.sfxMixer;
 				}
 
 				s.source.clip = s.clip;

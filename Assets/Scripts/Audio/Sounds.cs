@@ -6,7 +6,7 @@ namespace Audio {
 	public class Sounds : ScriptableObject {
 
 		[Tooltip("The music mixer.")]
-		public AudioMixerGroup mainMixer;
+		public AudioMixerGroup musicMixer;
 		[Tooltip("The SFX mixer.")]
 		public AudioMixerGroup sfxMixer;
 

@@ -18,7 +18,6 @@ namespace Messaging {
 
 		[SerializeField] private TextAsset[] jokes;
 		[SerializeField, Min(0)] private float sendJokeDelay = 2f;
-		[SerializeField, Min(0)] private float sendJokeLongDelay = 8f;
 		[SerializeField, Min(0)] private float initialSendJokeDelay = 4f;
 
 		private List<TextAsset> _jokesBag;
@@ -42,12 +41,23 @@ namespace Messaging {
 		}
 
 		private void Start() {
-			SendRandomJoke(initialSendJokeDelay);
+			StartCoroutine(SendRandomJoke(initialSendJokeDelay));
 		}
 
-		private async void SendRandomJoke(float delay) {
+		private IEnumerator SendRandomJoke(float delay) {
 			_sendButton.Lock();
-			await Task.Delay((int)(delay * 1000));
+			yield return new WaitForSeconds(delay);
+			_sendButton.Unlock();
+			
+			_currentJoke = GetRandomJoke();
+			CreateMessage(_currentJoke.QuestionMessage.Key, false);
+			_emojiButtonManager.SetButtonImages(GenerateButtonOptions());
+		}
+		
+		private IEnumerator SendRandomJoke(Coroutine routine, float delay) {
+			yield return routine;
+			_sendButton.Lock();
+			yield return new WaitForSeconds(delay);
 			_sendButton.Unlock();
 			
 			_currentJoke = GetRandomJoke();
@@ -62,17 +72,17 @@ namespace Messaging {
 				_currentJokeIndex = Mathf.Max(_currentJokeIndex, 0);
 				if (message == _currentJoke.AnswerMessage.Key) {
 					_sendButton.Lock();
-					StartCoroutine(ShowRealTexts());
+					Coroutine routine = StartCoroutine(ShowRealTexts());
 					if(_currentJokeIndex == 0)
-						SendRandomJoke(sendJokeLongDelay);
+						StartCoroutine(SendRandomJoke(routine, sendJokeDelay));
 					else
-						SendRandomJoke(sendJokeDelay);
+						StartCoroutine(SendRandomJoke(routine, sendJokeDelay));
 				} else {
 					_lives.Wrong();
 					if (_lives.CurrentLives == 0) {
 						_sendButton.Lock();
-						StartCoroutine(ShowRealTexts());
-						SendRandomJoke(sendJokeLongDelay);
+						Coroutine routine = StartCoroutine(ShowRealTexts());
+						StartCoroutine(SendRandomJoke(routine, initialSendJokeDelay));
 						_lives.ResetLives();
 					}
 				}
