@@ -72,16 +72,18 @@ namespace Messaging {
 				_currentJokeIndex = Mathf.Max(_currentJokeIndex, 0);
 				if (message == _currentJoke.AnswerMessage.Key) {
 					_sendButton.Lock();
-					Coroutine routine = StartCoroutine(ShowRealTexts());
-					if(_currentJokeIndex == 0)
-						StartCoroutine(SendRandomJoke(routine, sendJokeDelay));
-					else
-						StartCoroutine(SendRandomJoke(routine, sendJokeDelay));
+					bool isCorrect = _currentJokeIndex != 0;
+					Coroutine routine = StartCoroutine(ShowRealTexts(isCorrect));
+					StartCoroutine(SendRandomJoke(routine, sendJokeDelay));
+					
+					if (isCorrect) {
+						FindObjectOfType<ProgressBar>().AddProgress();
+					}
 				} else {
 					_lives.Wrong();
 					if (_lives.CurrentLives == 0) {
 						_sendButton.Lock();
-						Coroutine routine = StartCoroutine(ShowRealTexts());
+						Coroutine routine = StartCoroutine(ShowRealTexts(false));
 						StartCoroutine(SendRandomJoke(routine, initialSendJokeDelay));
 						_lives.ResetLives();
 					}
@@ -91,9 +93,11 @@ namespace Messaging {
 			}
 		}
 
-		private IEnumerator ShowRealTexts() {
+		private IEnumerator ShowRealTexts(bool isCorrect) {
 			yield return ModifyRealMessageText(_currentJoke.QuestionMessage.Value, _currentJokeIndex, false);
-			yield return ModifyMessageText(_currentJoke.AnswerMessage.Key, _messages.Length - 1, true, false);
+			if (!isCorrect) {
+				yield return ModifyMessageText(_currentJoke.AnswerMessage.Key, _messages.Length - 1, true, false);
+			}
 			yield return ModifyRealMessageText(_currentJoke.AnswerMessage.Value, _messages.Length - 1, true);
 		}
 
