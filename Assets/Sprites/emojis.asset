@@ -291,6 +291,48 @@ MonoBehaviour:
     m_Scale: 1
     m_Name: emojis_34
     m_HashCode: 1466336367
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 35
+    m_Scale: 1
+    m_Name: emojis_35
+    m_HashCode: 1466336366
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 36
+    m_Scale: 1
+    m_Name: emojis_36
+    m_HashCode: 1466336365
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 37
+    m_Scale: 1
+    m_Name: emojis_37
+    m_HashCode: 1466336364
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 38
+    m_Scale: 1
+    m_Name: emojis_38
+    m_HashCode: 1466336355
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 39
+    m_Scale: 1
+    m_Name: emojis_39
+    m_HashCode: 1466336354
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 40
+    m_Scale: 1
+    m_Name: emojis_40
+    m_HashCode: 1466336332
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 41
+    m_Scale: 1
+    m_Name: emojis_41
+    m_HashCode: 1466336333
   m_SpriteGlyphTable:
   - m_Index: 0
     m_Metrics:
@@ -852,5 +894,117 @@ MonoBehaviour:
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
     sprite: {fileID: -113662094, guid: 8ae36a4b17d221c4ead37cb5a361d758, type: 3}
+  - m_Index: 35
+    m_Metrics:
+      m_Width: 16
+      m_Height: 16
+      m_HorizontalBearingX: 0.5
+      m_HorizontalBearingY: 14
+      m_HorizontalAdvance: 16
+    m_GlyphRect:
+      m_X: 96
+      m_Y: 238
+      m_Width: 16
+      m_Height: 16
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+    sprite: {fileID: 1782743906, guid: 8ae36a4b17d221c4ead37cb5a361d758, type: 3}
+  - m_Index: 36
+    m_Metrics:
+      m_Width: 16
+      m_Height: 16
+      m_HorizontalBearingX: 0.5
+      m_HorizontalBearingY: 14
+      m_HorizontalAdvance: 16
+    m_GlyphRect:
+      m_X: 112
+      m_Y: 238
+      m_Width: 16
+      m_Height: 16
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+    sprite: {fileID: -141430030, guid: 8ae36a4b17d221c4ead37cb5a361d758, type: 3}
+  - m_Index: 37
+    m_Metrics:
+      m_Width: 16
+      m_Height: 16
+      m_HorizontalBearingX: 0.5
+      m_HorizontalBearingY: 14
+      m_HorizontalAdvance: 16
+    m_GlyphRect:
+      m_X: 128
+      m_Y: 238
+      m_Width: 16
+      m_Height: 16
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+    sprite: {fileID: 1788154038, guid: 8ae36a4b17d221c4ead37cb5a361d758, type: 3}
+  - m_Index: 38
+    m_Metrics:
+      m_Width: 16
+      m_Height: 16
+      m_HorizontalBearingX: 0.5
+      m_HorizontalBearingY: 14
+      m_HorizontalAdvance: 16
+    m_GlyphRect:
+      m_X: 144
+      m_Y: 238
+      m_Width: 16
+      m_Height: 16
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+    sprite: {fileID: -433500648, guid: 8ae36a4b17d221c4ead37cb5a361d758, type: 3}
+  - m_Index: 39
+    m_Metrics:
+      m_Width: 16
+      m_Height: 16
+      m_HorizontalBearingX: 0.5
+      m_HorizontalBearingY: 14
+      m_HorizontalAdvance: 16
+    m_GlyphRect:
+      m_X: 160
+      m_Y: 238
+      m_Width: 16
+      m_Height: 16
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+    sprite: {fileID: 1486583411, guid: 8ae36a4b17d221c4ead37cb5a361d758, type: 3}
+  - m_Index: 40
+    m_Metrics:
+      m_Width: 16
+      m_Height: 16
+      m_HorizontalBearingX: 0.5
+      m_HorizontalBearingY: 14
+      m_HorizontalAdvance: 16
+    m_GlyphRect:
+      m_X: 176
+      m_Y: 238
+      m_Width: 16
+      m_Height: 16
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+    sprite: {fileID: 326033734, guid: 8ae36a4b17d221c4ead37cb5a361d758, type: 3}
+  - m_Index: 41
+    m_Metrics:
+      m_Width: 16
+      m_Height: 16
+      m_HorizontalBearingX: 0.5
+      m_HorizontalBearingY: 14
+      m_HorizontalAdvance: 16
+    m_GlyphRect:
+      m_X: 192
+      m_Y: 238
+      m_Width: 16
+      m_Height: 16
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+    sprite: {fileID: 38818809, guid: 8ae36a4b17d221c4ead37cb5a361d758, type: 3}
   spriteInfoList: []
   fallbackSpriteAssets: []
