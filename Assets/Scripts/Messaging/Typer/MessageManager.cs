@@ -56,11 +56,12 @@ namespace Messaging {
 		}
 
 		public void CreateMessage(string message, bool isAnswer) {
-			ModifyMessageText(message, _messages.Length - 1, isAnswer);
+			ModifyMessageText(message, _messages.Length - 1, isAnswer, true);
 			if (isAnswer) {
 				_currentJokeIndex--;
 				_currentJokeIndex = Mathf.Max(_currentJokeIndex, 0);
 				if (message == _currentJoke.AnswerMessage.Key) {
+					_sendButton.Lock();
 					StartCoroutine(ShowRealTexts());
 					if(_currentJokeIndex == 0)
 						SendRandomJoke(sendJokeLongDelay);
@@ -69,6 +70,7 @@ namespace Messaging {
 				} else {
 					_lives.Wrong();
 					if (_lives.CurrentLives == 0) {
+						_sendButton.Lock();
 						StartCoroutine(ShowRealTexts());
 						SendRandomJoke(sendJokeLongDelay);
 						_lives.ResetLives();
@@ -81,6 +83,7 @@ namespace Messaging {
 
 		private IEnumerator ShowRealTexts() {
 			yield return ModifyRealMessageText(_currentJoke.QuestionMessage.Value, _currentJokeIndex, false);
+			yield return ModifyMessageText(_currentJoke.AnswerMessage.Key, _messages.Length - 1, true, false);
 			yield return ModifyRealMessageText(_currentJoke.AnswerMessage.Value, _messages.Length - 1, true);
 		}
 
@@ -111,9 +114,11 @@ namespace Messaging {
 			return emojiStrings;
 		}
 
-		private void ModifyMessageText(string message, int index, bool isAnswer) {
-			ModifyPreviousMessage(index);
-			_messages[index].SetMessageText(message, true, isAnswer);
+		private Coroutine ModifyMessageText(string message, int index, bool isAnswer, bool createNew) {
+			if(createNew)
+				ModifyPreviousMessage(index);
+			
+			return _messages[index].SetMessageText(message, true, isAnswer);
 		}
 
 		private Coroutine ModifyRealMessageText(string message, int index, bool isAnswer) {

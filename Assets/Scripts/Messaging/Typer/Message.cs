@@ -23,7 +23,7 @@ namespace Messaging {
 			answerContainer.InitializeTypers();
 		}
 
-		public void SetMessageText(string text, bool animate, bool isAnswer) {
+		public Coroutine SetMessageText(string text, bool animate, bool isAnswer) {
 			Text = text;
 			IsAnswer = isAnswer;
 			IsReal = false;
@@ -32,17 +32,19 @@ namespace Messaging {
 				SetText(ref answerContainer.TypingCoroutine, answerContainer.messageText, answerContainer.TextTyper,
 					text, animate);
 				
-				if(string.IsNullOrEmpty(text)) return;
+				if(string.IsNullOrEmpty(text)) return null;
 				answerContainer.container.SetActive(true);
 				questionContainer.container.SetActive(false);
-			} else {
-				SetText(ref questionContainer.TypingCoroutine, questionContainer.messageText,
-					questionContainer.TextTyper, text, animate);
-				
-				if(string.IsNullOrEmpty(text)) return;
-				questionContainer.container.SetActive(true);
-				answerContainer.container.SetActive(false);
+				return answerContainer.TypingCoroutine;
 			}
+			
+			SetText(ref questionContainer.TypingCoroutine, questionContainer.messageText,
+				questionContainer.TextTyper, text, animate);
+				
+			if(string.IsNullOrEmpty(text)) return null;
+			questionContainer.container.SetActive(true);
+			answerContainer.container.SetActive(false);
+			return questionContainer.TypingCoroutine;
 		}
 
 		public Coroutine SetMessageRealText(string text, bool animate, bool isAnswer) {
