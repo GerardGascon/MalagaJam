@@ -73,12 +73,15 @@ namespace Messaging {
 				if (message == _currentJoke.AnswerMessage.Key) {
 					_sendButton.Lock();
 					bool isCorrect = _currentJokeIndex != 0;
-					Coroutine routine = StartCoroutine(ShowRealTexts(isCorrect));
-					StartCoroutine(SendRandomJoke(routine, sendJokeDelay));
 					
 					if (isCorrect) {
-						FindObjectOfType<ProgressBar>().AddProgress();
+						if (FindObjectOfType<ProgressBar>().AddProgress())
+							return;
 					}
+					
+					Coroutine routine = StartCoroutine(ShowRealTexts(isCorrect));
+					StartCoroutine(SendRandomJoke(routine, sendJokeDelay));
+					_lives.ResetLives();
 				} else {
 					_lives.Wrong();
 					if (_lives.CurrentLives == 0) {

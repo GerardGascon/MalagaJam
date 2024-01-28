@@ -14,12 +14,19 @@ namespace Flow {
 			UpdateFill();
 		}
 
-		public void AddProgress() {
+		public bool AddProgress() {
 			_progressDone++;
 
 			if (_progressDone <= numberToWin) {
 				UpdateFill();
 			}
+
+			if (_progressDone >= numberToWin) {
+				FindObjectOfType<WinScreen>().Win();
+				return true;
+			}
+
+			return false;
 		}
 
 		private void UpdateFill() {
